@@ -28,6 +28,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['geekfahim-crm.herokuapp.com','127.0.0.1']
 
 
+import django_heroku
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -129,3 +131,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
+
+
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
