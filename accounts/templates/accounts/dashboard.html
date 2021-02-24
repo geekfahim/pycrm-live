@@ -1,0 +1,103 @@
+{%extends 'accounts/main.html'%}
+
+{%block title%}
+{%endblock%}
+
+
+{%block content%}
+<div class="container-fluid">
+    <div class="row">    
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3" style="margin: 10px;">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body">
+                  <h5>{{total_order}}</h5>
+                </div>
+              </div>                
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3" style="margin: 10px;">
+                <div class="card-header">Orders Delivered</div>
+                <div class="card-body">
+                    <h5>{{delivered}}</h5>
+                </div>
+              </div>                
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-secondary mb-3" style="margin: 10px;">
+                <div class="card-header">Orders Pending</div>
+                <div class="card-body">
+                  <h5>{{pending}}</h5>
+                </div>
+              </div>                
+        </div>                
+    </div>  
+    <div class="row my-4">
+        <div class="col-md-4">
+            <h5>Customers</h5>
+            <hr>
+            <div class="card">
+              <div class="card-body">
+                <table class="table">
+                  <a href="{% url 'create_customer' %}" class="btn btn-primary btn-sm btn-block">Create Customer</a>
+                  <thead class="thead">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Customer</th>
+                      <th scope="col">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                      <td>{{customer.id}}</td>
+                      <td>
+                        <a href="{% url 'customerDetail' customer.id%}">
+                          {{customer.name}}
+                        </a>
+                      </td>
+                      <td> {{customer.phone}}</td>
+                      </tr>
+                    {%endfor%}
+                  </tbody>
+              </table>    
+              </div>
+            </div>      
+        </div>
+        <div class="col-md-8">
+          <h5>Last 5 Orders</h5>
+          <hr>
+          <div class="card">
+            <div class="card-body">
+              <table class="table">
+                <a  href="{% url 'create_order' %}" type="button" class="btn btn-primary btn-sm btn-block">Create Orders</a>
+                <thead class="thead">
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for order in orders%}                  
+                  <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-info"><i class="far fa-edit"></i>&nbsp;</a>
+<a href="{% url 'delete_order' order.id %}" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i>&nbsp;</a>
+                    </td>
+                    
+                  </tr>
+                  {%endfor%}
+                </tbody>
+            </table>     
+            </div>
+          </div>
+            <hr>       
+        </div>
+    </div>
+</div>
+
+{%endblock%}

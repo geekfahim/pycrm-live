@@ -1,0 +1,30 @@
+{%extends 'accounts/main.html'%}
+{%block title%}
+{%endblock%}
+{% load widget_tweaks %}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">
+                    Add New Product
+                </h5>                    
+                    <!-- {{form}} -->
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        {{field.label}}
+                        {{field|add_class:'form-control'}}
+                        {% endfor %}
+                        <hr>
+                        <input type="submit" class="btn btn-info">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
